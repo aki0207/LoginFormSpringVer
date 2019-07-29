@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.login.domain.repository.user.UserRepository">
+
+    <resultMap id="userResultMap" type="User">
+        <id property="user_id" column="user_id" />
+        <result property="mail_address" column="mail_address" />
+        <result property="password" column="password" />
+    </resultMap>
+
+    <select id="create" parameterType="User">
+    <![CDATA[
+        insert into user
+        (
+            user_id,
+            mail_address,
+            password
+        )
+            user
+        values
+        (
+        	#{user_id},
+        	#{mail_address},
+        	#{password}
+        )
+        
+    ]]>
+    </select>
+
+    <select id="find" resultMap="userResultMap">
+    <![CDATA[
+        select
+         	user_id,
+            mail_address,
+            password
+        from
+            user
+        where
+        	mail_address = #{mail_address},
+        	password = #{password}
+    ]]>
+    </select>
+
+   
+
+</mapper>
